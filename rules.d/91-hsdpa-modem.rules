@@ -1,1 +1,1 @@
-/etc/udev/rules.d/91-hsdpa-modem.rules
+ACTION=="add", SUBSYSTEM=="tty", KERNEL=="ttyUSB0", RUN+="/usr/local/bin/umtson"

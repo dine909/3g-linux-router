@@ -1,1 +1,16 @@
-/usr/local/bin/naton
+# delete old configuration, if any
+	#Flush all the rules in filter and nat tables
+   	iptables --flush           		
+   	iptables --table nat --flush
+	
+	# delete all chains that are not in default filter and nat table, if any
+   	iptables --delete-chain     
+   	iptables --table nat --delete-chain
+
+	# Set up IP FORWARDing and Masquerading (NAT)
+   	iptables --table nat --append POSTROUTING --out-interface ppp0 -j MASQUERADE
+   	iptables --append FORWARD --in-interface eth1 -j ACCEPT
+
+	#enable IP forwarding
+   	echo 1 > /proc/sys/net/ipv4/ip_forward
+ 	

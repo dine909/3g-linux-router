@@ -1,1 +1,17 @@
-/usr/local/bin/umtson
+#! /bin/sh
+
+if [ "${ACTION}" = "add" ] 
+then
+    echo ${DEVICE} >> /var/log/umts.log
+
+DEV=$1
+
+if [ -z "$1" ] ; then
+	DEV="/dev/ttyUSB0"
+fi
+
+/usr/sbin/pppd $DEV call three
+naton
+
+fi
+

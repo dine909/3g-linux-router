@@ -1,1 +1,27 @@
-/etc/ppp/peers/three
+/dev/ttyUSB0
+460800
+persist
+lock
+crtscts
+modem
+noauth
+# dns, routing
+usepeerdns
+replacedefaultroute
+defaultroute
+noipdefault
+# avoid compression:
+noccp
+nobsdcomp
+novj
+# usually doesnt matter for GPRS/UMTS connections:
+user "web"
+password ""
+# connect script
+connect "/usr/sbin/chat -v -f /etc/chatscripts/three"
+# t-mobile specific?
+ipcp-restart 8
+ipcp-max-configure 50
+ipcp-accept-local
+ipcp-accept-remote
+
