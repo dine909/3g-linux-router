@@ -1,17 +1,33 @@
+#!/bin/bash
+
+echo `date` naton to ppp0  >> /var/log/ppp0
+
 # delete old configuration, if any
 	#Flush all the rules in filter and nat tables
-   	iptables --flush           		
+   	iptables --flush
    	iptables --table nat --flush
-	
+
 	# delete all chains that are not in default filter and nat table, if any
-   	iptables --delete-chain     
+   	iptables --delete-chain
    	iptables --table nat --delete-chain
 
 	# Set up IP FORWARDing and Masquerading (NAT)
    	iptables --table nat --append POSTROUTING --out-interface ppp0 -j MASQUERADE
-   	iptables --append FORWARD --in-interface eth1 -j ACCEPT
+   	iptables --append FORWARD --in-interface usb0 -j ACCEPT
+
+	#forward some ports
+	#iptables -A PREROUTING -t nat -i ppp0 -p tcp --dport 8080 -j DNAT --to 10.1.1.1:80
+	#iptables -A INPUT -p tcp -m state --state NEW --dport 80 -i ppp0 -j ACCEPT
+	#iptables -t nat -A PREROUTING -p tcp -i usb0 -d netbox.20hz.co.uk --dport 8080 -j DNAT --to 10.1.1.1:22
+	#iptables -A INPUT -p tcp -m state --state NEW --dport 22 -i usb0 -j ACCEPT
+	iptables -t nat -A PREROUTING -p tcp -i ppp0 -d netbox.hopto.org --dport 8080 -j DNAT --to 10.1.1.1:80
+	iptables -A FORWARD -p tcp -i ppp0 -o usb0 -d 10.1.1.1 --dport 80 -m state --state NEW -j ACCEPT
+
+	#DROP
+	iptables -I FORWARD -d swscan.apple.com -j DROP
+	iptables -I FORWARD -d swquery.apple.com -j DROP
 
 	#enable IP forwarding
    	echo 1 > /proc/sys/net/ipv4/ip_forward
- 	
-service bind9 start
+
+echo 1 > /sys/devices/platform/leds-gpio/leds/beagleboard::pmu_stat/brightness

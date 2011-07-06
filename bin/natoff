@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo `date` natoff >> /var/log/ppp0
+
+# delete old configuration, if any
+	#Flush all the rules in filter and nat tables
+   	iptables --flush
+   	iptables --table nat --flush
+
+	# delete all chains that are not in default filter and nat table, if any
+   	iptables --delete-chain
+   	iptables --table nat --delete-chain
+
+   	echo 0 > /proc/sys/net/ipv4/ip_forward
+
+echo 0 > /sys/devices/platform/leds-gpio/leds/beagleboard::pmu_stat/brightness
+

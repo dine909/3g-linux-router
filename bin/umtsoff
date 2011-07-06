@@ -1,4 +1,6 @@
 #! /bin/sh
 
-/usr/bin/poff
+echo `date` umtsoff >> /var/log/ppp0
 
+/usr/bin/poff -a
+killall pppd

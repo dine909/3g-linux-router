@@ -1,1 +1,7 @@
-ACTION=="add", SUBSYSTEM=="tty", KERNEL=="ttyUSB0", RUN+="/usr/local/bin/umtson"
+ACTION=="add", SUBSYSTEM=="usb", PRODUCT=="19d2/31/0", RUN+="/usr/local/bin/umtson /dev/ttyUSB2"
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1506", RUN+="/usr/local/bin/umtson /dev/ttyUSB0"
+
+ACTION=="remove", SUBSYSTEM=="usb", PRODUCT=="19d2/31/0", RUN+="/usr/local/bin/umtsoff"
+ACTION=="remove", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1506", RUN+="/usr/local/bin/umtsoff"
+
+

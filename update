@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cp /etc/udev/rules.d/91-hsdpa-modem.rules rules.d/
+cp /etc/udev/rules.d/92-usb-modem.rules rules.d/
+cp /etc/ppp/peers/three peers/
+cp /etc/ppp/peers/three peers/
+cp /etc/chatscripts/three chatscripts/
+cp /usr/local/bin/umtson bin/
+cp /usr/local/bin/umtsoff bin/
+cp /usr/local/bin/naton bin/
+cp /usr/local/bin/natoff bin/
+cp /etc/usb_modeswitch.d/12d1\:1446 usb_modeswitch.d/
+

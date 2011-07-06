@@ -1,17 +1,35 @@
 #! /bin/sh
 
-if [ "${ACTION}" = "add" ] 
-then
-    echo ${DEVICE} >> /var/log/umts.log
+if [ -f /tmp/umtson.lock ] ; then
+  # the lock file already exists, so what to do?
+  if [ "$(ps -p `cat /tmp/umtson.lock` | wc -l)" -gt 1 ]; then
+    # process is still running
+    echo "$0: quit at start: lingering process `cat /tmp/umtson.lock`"
+    exit 0
+  else
+    # process not running, but lock file not deleted?
+    echo " $0: orphan lock file warning. Lock file deleted."
+    rm /tmp/umtson.lock
+  fi
+fi
+
+echo $$ > /tmp/umtson.lock
 
 DEV=$1
 
 if [ -z "$1" ] ; then
-	DEV="/dev/ttyUSB0"
+	DEV="/dev/ttyUSB2"
 fi
 
+echo `date` umtson with port $DEV >> /var/log/ppp0
+
+set -e
+
+#killall pppd
+
+sleep 10
 /usr/sbin/pppd $DEV call three
-naton
 
-fi
+#fi
 
+rm /tmp/umtson.lock
