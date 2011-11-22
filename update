@@ -9,4 +9,5 @@ cp /usr/local/bin/umtsoff bin/
 cp /usr/local/bin/naton bin/
 cp /usr/local/bin/natoff bin/
 cp /etc/usb_modeswitch.d/12d1\:1446 usb_modeswitch.d/
-
+cp /etc/ppp/ip-down.d/00993gnat ip-down.d/
+cp /etc/ppp/ip-up.d/00993gnat ip-up.d/

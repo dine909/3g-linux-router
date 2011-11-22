@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+natoff $PPP_IFACE
+exit 0
