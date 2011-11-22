@@ -1,5 +1,5 @@
 #!/bin/bash
-# Requires PPP usb-modeswitch
+# Requires ppp usb-modeswitch
 
 mkdir -p /etc/ppp/peers
 mkdir -p /etc/chatscripts
@@ -13,4 +13,5 @@ cp bin/umtsoff /usr/local/bin/
 cp bin/naton /usr/local/bin/
 cp bin/natoff /usr/local/bin/
 cp usb_modeswitch.d/12d1\:1446 /etc/usb_modeswitch.d/
-
+cp ip-down.d/00993gnat /etc/ppp/ip-down.d/
+cp ip-up.d/00993gnat /etc/ppp/ip-up.d/
