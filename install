@@ -1,4 +1,8 @@
 #!/bin/bash
+# Requires PPP usb-modeswitch
+
+mkdir -p /etc/ppp/peers
+mkdir -p /etc/chatscripts
 
 cp rules.d/91-hsdpa-modem.rules /etc/udev/rules.d/
 cp rules.d/92-usb-modem.rules /etc/udev/rules.d/
