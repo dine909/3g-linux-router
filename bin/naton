@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo `date` naton to ppp0  >> /var/log/ppp0
+echo `date` naton to $1  >> /var/log/ppp0
 
 # delete old configuration, if any
 	#Flush all the rules in filter and nat tables
