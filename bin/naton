@@ -299,6 +299,10 @@ $IPTABLES -A FORWARD -i $EXTIF -o $INTIF -m state --state ESTABLISHED,RELATED -j
 $IPTABLES -A FORWARD -i $INTIF -o $EXTIF -j ACCEPT
 $IPTABLES -A FORWARD -j LOG
 
+#DROP
+iptables -I FORWARD -d swscan.apple.com -j DROP
+iptables -I FORWARD -d swquery.apple.com -j DROP
+
 echo "   Enabling SNAT (MASQUERADE) functionality on $EXTIF"
 
 $IPTABLES -t nat -A POSTROUTING -o $EXTIF -j MASQUERADE
